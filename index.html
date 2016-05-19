@@ -1,0 +1,185 @@
+<html>
+<head>
+    <style type="text/css">@charset "UTF-8";
+    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide:not(.ng-hide-animate) {
+        display: none !important;
+    }
+
+    ng\:form {
+        display: block;
+    }
+
+    .ng-animate-shim {
+        visibility: hidden;
+    }
+
+    .ng-anchor {
+        position: absolute;
+    }</style>
+
+
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/animate.css"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js"></script>
+    <script>
+
+        function setFocusToTextBox() {
+            document.getElementById("inputBox").focus();
+        }
+
+        angular.module('hello', [])
+            .factory('fizzer', function () {
+                return {
+                    testFizz: function (input, callback) {
+                        /**
+                         * Arguments: `input', an integer, and `callback', a function.
+                         *
+                         * TODO: Please complete this function to invoke `callback'
+                         * with the string "fizz" if 3 divides `input' evenly, "buzz"
+                         * if 5 divides `input' evenly, and "fizzbuzz" if 15 divides
+                         * `input' evenly.
+                         * If none of these conditions are met, invoke `callback' with
+                         * the string "Aw, shucks.";
+                         **/
+
+                        // Your code here! :)
+
+                        var i = input;
+
+
+                        // Check if 'i' is divisible by 15
+                        if (i % 15 === 0) {
+                            console.log("FizzBuzz");
+                            callback(function () {
+                                $('.fizz').html("FizzBuzz").css({color: 'blue'});
+                            }());
+
+                            // Check if 'i' is divisible by 3
+                        } else if (i % 3 === 0) {
+                            console.log("Fizz");
+                            callback(function () {
+                                $('.fizz').html("Fizz").css({color: 'Green'});
+                            }());
+
+                            // Check if 'i' is divisible by 5
+                        } else if (i % 5 === 0) {
+                            console.log("Buzz");
+                            callback(function () {
+                                $('.fizz').html("Buzz").css({color: 'yellow'});
+                            }());
+
+                            // If none of the above, print 'i'
+                        } else {
+                            console.log("Aw, shucks!");
+                            callback(function () {
+                                $('.fizz').html("Aw, shucks!").css({color: 'brown'});
+
+                            }());
+                        }
+//
+
+                    }
+                };
+            })
+            .controller('HelloCtrl', ['$scope', 'fizzer', function ($scope, fizzer) {
+                /**
+                 * We've provided the scope method `fizzBuzz,;' but it's not hooked
+                 * into the UI at all. Please hook it up in the UI so that your testFizz
+                 * code (above) runs when the button is clicked.
+                 **/
+
+                /**
+                 * Bonus points: Explain on the page somewhere what's different or dis/advantageous
+                 * about these two different JS conventions, and how promises could be used to make it better:
+                 *
+                 * $scope.foo = bar(x);
+                 *
+                 *      In the earlier version of Angular up to 1.2, when the promise resolved, Angular would automatically update the view.
+                 *      However, now it depreciates and no longer unwraps the promise automatically.
+                 *
+                 * bar(x, function (t) { $scope.x = t; });
+                 *      This javascript code is much better because the bar object pass in a parameter and a callback function to resolve a promise.  If the
+                 *      the promise doesn't come back (server down... etc.) , then you can include an error.
+                 *
+                 *
+                 * Comments:  In a real app, we should break all this code into modules eg. controllers, factories, services, views etc.
+                 **/
+
+                $('#inputBox').keyup(function (enter) {
+                    if (enter.keyCode == 13) {
+                        $('#btnClick').click();
+                    }
+                });
+
+                $scope.fizzBuzz = function () {
+                    fizzer.testFizz($scope.numberTest, function (x) {
+                        $scope.fizzResult = x;
+                    });
+
+                    $scope.numberTest = "";
+                    $scope.numberTest = setFocusToTextBox();
+
+                };
+            }]);
+    </script>
+</head>
+<body ng-app="hello" class="ng-scope" onload='setFocusToTextBox()'>
+
+
+<div class="container">
+
+    <div class="row">
+        <div class="box">
+            <!--<div class="col-lg-12">-->
+
+            <!-- -->
+            <!--</div>-->
+            <div class="col-lg-12 col-md-12 col-xs-12 text-center">
+
+                <div class="col-lg-12">
+                    <h2 class="intro-text text-center wow slideInDown">
+                        <strong>Fizz Buzz Game</strong>
+                    </h2>
+                </div>
+                <div ng-controller="HelloCtrl" class="ng-scope">
+
+                    <div class="all-result">
+                        <div class="fizz" ng-bind="fizzResult" class="ng-binding"></div>
+
+                    </div>
+
+                    <!--problem: user still can enter letter e. need to do more validations-->
+                    <input id="inputBox" type="number" placeholder="Please Enter a Number." ng-model="numberTest"
+                           class="ng-valid ng-dirty ng-valid-number ng-touched">
+                    <br/>
+                    <button id="btnClick" type="button" ng-click="fizzBuzz()">Click!</button>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+<!-- /.container -->
+
+<script src="js/jquery.js"></script>
+<script src="js/wow.min.js"></script>
+<script>
+    new WOW().init();
+</script>
+
+</body>
+</html>
