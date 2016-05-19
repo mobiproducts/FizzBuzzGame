@@ -57,3 +57,13 @@ button{
 
 }
 
+
+.social-icons {
+    text-align: center;
+}
+.social-icons ul {
+    list-style: none;
+    padding: 0;}
+.social-icons ul li {
+    display: inline;
+}
