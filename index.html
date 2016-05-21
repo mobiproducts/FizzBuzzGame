@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="css/animate.css"/>
 
+    <!--google fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -51,38 +54,62 @@
                          * the string "Aw, shucks.";
                          **/
 
+                        /**
+                         *5/20/2015
+                         * animation using animate.css a css library on https://github.com/daneden/animate.css
+                         *
+                         * how: 1. add animation class
+                         *      2. end the amination
+                         *      3. remove animation class
+                         **/
                         // Your code here! :)
 
-                        var i = input;
+                        var i = input,
+
+                            animationBounceOut ='animated bounceOut',
+                            animationShake ='animated shake',
+                            animationBounceInUp ='animated bounceInUp',
+                            animationRubberBand ='animated rubberBand',
+                            animationBounceInLeft ='animated bounceInLeft',
+                            animationLightSpeedIn ='animated lightSpeedIn',
+
+                            animationEnd ='webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+
 
 
                         // Check if 'i' is divisible by 15
                         if (i % 15 === 0) {
                             console.log("FizzBuzz");
                             callback(function () {
-                                $('.fizz').html("FizzBuzz").css({color: 'blue'});
+                                $('.fizz').html("FizzBuzz").css({color: 'blue'}).addClass(animationBounceOut).one(animationEnd, function(){
+                                    $(this).removeClass(animationBounceOut);
+                                });
                             }());
 
                             // Check if 'i' is divisible by 3
                         } else if (i % 3 === 0) {
                             console.log("Fizz");
                             callback(function () {
-                                $('.fizz').html("Fizz").css({color: 'Green'});
+                                $('.fizz').html("Fizz").css({color: 'green'}).addClass(animationBounceInLeft).one(animationEnd, function(){
+                                    $(this).removeClass(animationBounceInLeft);
+                                });
                             }());
 
                             // Check if 'i' is divisible by 5
                         } else if (i % 5 === 0) {
                             console.log("Buzz");
                             callback(function () {
-                                $('.fizz').html("Buzz").css({color: 'yellow'});
+                                $('.fizz').html("Buzz").css({color: 'Yellow'}).addClass(animationLightSpeedIn).one(animationEnd, function(){
+                                    $(this).removeClass(animationLightSpeedIn);
+                                });
                             }());
 
-                            // If none of the above, print 'i'
                         } else {
                             console.log("Aw, shucks!");
                             callback(function () {
-                                $('.fizz').html("Aw, shucks!").css({color: 'brown'});
-
+                                $('.fizz').html("Aw, Shucks!").css({color: 'brown'}).addClass(animationShake).one(animationEnd, function(){
+                                    $(this).removeClass(animationShake);
+                                });
                             }());
                         }
 //
@@ -146,9 +173,15 @@
             <div class="col-lg-12 col-md-12 col-xs-12 text-center">
 
                 <div class="col-lg-12">
-                    <h2 class="intro-text text-center wow slideInDown">
-                        <strong>Fizz Buzz Game</strong>
-                    </h2>
+                    <!--<h2 class="intro-text text-center wow slideInDown">-->
+                        <!--<strong>Fizz Buzz Game</strong>-->
+                    <!--</h2>-->
+                    <div class="titleText">
+                        <div class="titleFizz animated rollIn">Fizz</div>
+                        <div class="titleBuzz animated bounceInRight">Buzz</div>
+                        <div class="titleClear"></div>
+                    </div>
+
 
                 </div>
                 <div ng-controller="HelloCtrl" class="ng-scope">
@@ -166,6 +199,7 @@
 
 
                 </div>
+                <div style="clear: both"></div>
 
             </div>
 

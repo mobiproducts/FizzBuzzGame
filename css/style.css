@@ -6,6 +6,32 @@ html {
 
 }
 
+
+.titleText{
+    /*display: inline-block;*/
+    /*position: relative;*/
+    margin-left: 40%;
+    margin-right: 40%;
+}
+.titleFizz{
+    color: red;
+    font-family: 'Fredoka One', cursive;
+    font-size: 3em;
+    float: left;
+
+}
+
+.titleBuzz{
+    color: yellow;
+    font-family: 'Fredoka One', cursive;
+    font-size: 3em;
+    float: right;
+    /*position: absolute;*/
+}
+.titleClear{
+    clear: both;
+}
+
 .container{
     text-align: center;
     padding-top: 5em;
@@ -19,6 +45,7 @@ html {
 
 .fizz{
     font-size: xx-large;
+    font-family: 'Fredoka One', cursive;
 }
 
 
@@ -54,6 +81,7 @@ button{
     font-size: x-large;
     border: none;
     outline: none;
+    cursor: pointer;
 
 }
 
